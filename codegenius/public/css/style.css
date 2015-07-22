@@ -85,7 +85,9 @@ font-size: 22px;
 color: #fff;
 font-weight: 900;
 }
-
+#tf-menu a.navbar-brand:hover {
+  color: #FDE500;
+}
 #tf-menu.navbar-default .navbar-nav > li > a {
 	text-transform: uppercase;
 	color: #FFF;
@@ -574,3 +576,10 @@ nav#footer p{
 	background: #FDE500;
 	border-color: #FDE500;
 	color: #ffffff;
+}
+#logo{
+  margin-bottom: 10px;
+  padding-left: 10px;
+  height: 65px;
+  width: 65px;
+}
