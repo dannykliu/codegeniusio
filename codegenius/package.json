@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "forever start --minUptime 1000ms --spinSleepTime 5000ms --killSignal=SIGTERM -f -a -l for.log -o out.log -e err.log -c 'nodemon --exitcrash --ignore public/' ./bin/www",
+    "stop": "forever stopall"
   },
   "dependencies": {
     "body-parser": "~1.8.1",
