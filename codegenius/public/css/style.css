@@ -139,7 +139,9 @@ font-weight: 900;
 #tf-home p.lead{
 	color: #e3e3e3;
 }
-
+.about-text{
+    margin: auto;
+}
 .content{
 	position: relative;
 	padding: 20% 0 0;
