@@ -3,6 +3,8 @@ var router = express.Router();
 var crypto = require('crypto');
 var exec = require('child_process').exec;
 creds = require('../credentials');
+require('./common');
+
 /* GET home page. */
 router.get('/', function(req, res) {
   res.render('index', { title: 'Express' });
