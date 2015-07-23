@@ -177,7 +177,8 @@ a.fa.fa-angle-down:hover{
 }
 /* About Section */
 #tf-about{
-	padding: 80px 0;
+    padding-top: 40px;
+	padding-bottom: 40px;
 }
 ul.about-list{ margin: 30px 0 0 ;}
 ul.about-list li{
@@ -209,7 +210,8 @@ ul.about-list li span{
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', endColorstr='#66000000',GradientType=0 ); /* IE6-9 */
 	height: auto;
 	background-attachment: fixed;
-	padding: 80px 0;
+	padding-top: 50px;
+    padding-bottom: 50px;
 }
 .section-title.center{
 	padding: 30px 0;
@@ -289,7 +291,7 @@ img.img-circle.team-img {
 /* Services Section */
 #tf-services{
     margin-top: 0px;
-	padding: 80px 0;
+    padding-bottom: 80px;
 }
 
 .space{
