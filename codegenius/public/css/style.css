@@ -167,14 +167,39 @@ a.fa.fa-angle-down {
 	border: 2px solid #b4b4b4;
 	border-radius: 50%;
 	font-size: 24px;
-	margin-top: 200px;
 	transition: all 0.5s;
+    margin-top: 190px;
 }
 a.fa.fa-angle-down:hover{
 	background: #FDE500;
 	color: #ffffff;
 	border: 2px solid #FDE500;
 }
+
+.btn btn-default {
+  -webkit-border-radius: 12;
+  -moz-border-radius: 12;
+  border-radius: 12px;
+  font-family: Arial;
+  color: #000000;
+  font-size: 20px;
+  background: #ffffff;
+  padding: 10px 20px 10px 20px;
+  border: solid #00090f 2px;
+  text-decoration: none;
+  display: block;
+}
+.btn btn-default:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}
+
+
 /* About Section */
 #tf-about{
     padding-top: 40px;
