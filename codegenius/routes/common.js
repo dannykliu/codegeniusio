@@ -1,5 +1,6 @@
 express = require('express');
 creds   = require('../credentials');
+nodemailer = require('nodemailer');
 
 // Sets up mongoose
 mongoose = require('mongoose');
@@ -25,5 +26,13 @@ renderGeneric = function(page, vars, res) {
     }
   });
 };
+
+transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+        user: creds.email_user, 
+        pass: creds.email_pass 
+    }
+});
 
 Users = mongoose.model('users', userSchema);

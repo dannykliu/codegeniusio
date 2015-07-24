@@ -243,24 +243,24 @@
                         <div class="clearfix"></div>            
                     </div>
 
-                    <form>
+                    <form action="/contact" method="post">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Name</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter name">
+                                    <label for="name">Name</label>
+                                    <input id="name" type="text" name="name" class="form-control" placeholder="Enter name">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Email</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter email">
+                                    <label for="email">Email</label>
+                                    <input id="email" type="email" name="email" class="form-control"  placeholder="Enter email">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Message</label>
-                            <textarea class="form-control" rows="3"></textarea>
+                            <label for="message">Message</label>
+                            <textarea id="message" class="form-control" name="message" rows="3"></textarea>
                         </div>
                         
                         <button type="submit" class="btn tf-btn btn-default">Submit</button>
