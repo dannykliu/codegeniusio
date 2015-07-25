@@ -3,6 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <title>Code Genius</title>
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <%
+      if(typeof css != 'undefined') {
+        for(i in css) {
+    %>
+          <link href="/css/<%= css[i] %>.css" rel="stylesheet">
+    <%
+        }
+      }
+  %>
 </head>
 <body>
   <div class="row top-bar">
@@ -13,5 +24,16 @@
   <div class="container">
     <%- content %>
   </div>
+  <script src="/javascripts/jquery-2.1.1.min.js"></script>
+  <script src="/javascripts/bootstrap.min.js"></script>
+  <%
+      if(typeof js != 'undefined') {
+        for(i in js) {
+    %>
+          <script src="/js/<%= js[i] %>.js"></script>
+    <%
+        }
+      }
+  %>
 </body>
 </html>
