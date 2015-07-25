@@ -27,6 +27,11 @@ router.post('/contact', function(req, res) {
     res.redirect('/');
   });
 });
+  
+/*GET expert/user registration page*/
+router.get('/expert', function(req, res){
+  res.render("expertRegister.ejs", {});
+});
 
 router.get('/user', function(req, res) {
   res.render('userRegister', {});
