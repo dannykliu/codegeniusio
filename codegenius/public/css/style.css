@@ -2,6 +2,7 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,700,300,600,800,400);
 
 body, html{
+    overflow-x: hidden;
 	font-family: 'Lato', sans-serif;
 	text-rendering: optimizeLegibility !important;
 	-webkit-font-smoothing: antialiased !important;
@@ -74,7 +75,7 @@ ul, ol{
 }
 /* Navigation */
 #tf-menu {
-	padding: 20px;
+	padding: 20px, 0px, 20px, 20px;
 	transition: all 0.8s;
 }
 #tf-menu.navbar-default {
@@ -626,7 +627,7 @@ nav#footer p{
   -ms-transition: background-color 0.3s linear;
   -o-transition: background-color 0.3s linear;
   transition: background-color 0.3s linear;
-  border-radius: 12px;
+  border-radisus: 12px;
   color: #fff;
   font-size: 20px;
   padding: 10px 20px 10px 20px;
@@ -639,7 +640,5 @@ nav#footer p{
   color: #000;
 }
 .register-wrapper {
-  padding-top: 5%
-    
-    ;
+  padding-top: 5%;
 }
