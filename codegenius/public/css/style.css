@@ -517,12 +517,12 @@ ol.type li a.active { font-weight: 700; }
 
 #testimonial .item p {
 	font-weight: 400;
-	margin: 30px 0;
+	margin: 20px 0;
 	color: #d1d1d1;
 }
 /* Contact Section */
 #tf-contact{
-	padding: 80px 0;
+	padding: 30px 0;
 }
 
 label {
@@ -627,7 +627,7 @@ nav#footer p{
   -ms-transition: background-color 0.3s linear;
   -o-transition: background-color 0.3s linear;
   transition: background-color 0.3s linear;
-  border-radisus: 12px;
+  border-radius: 5px;
   color: #fff;
   font-size: 20px;
   padding: 10px 20px 10px 20px;
