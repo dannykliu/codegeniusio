@@ -2,6 +2,18 @@ express = require('express');
 creds   = require('../credentials');
 nodemailer = require('nodemailer');
 
+// Basic Render Function
+renderGeneric = function(page, vars, res) {
+  express().render(page + '.ejs', vars, function(err, html) {
+    if(err) {
+      console.log(err);
+    } else {
+      vars.content = html;
+      res.render('genericDash', vars);
+    }
+  });
+};
+
 // Sets up mongoose
 mongoose = require('mongoose');
 Schema = mongoose.Schema;
