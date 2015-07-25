@@ -12,6 +12,22 @@ router.get('/', function(req, res) {
   res.render('index', {});
 });
 
+router.post('/contact', function(req, res) {
+  var mailOptions = {
+    from: creds.email_user, // sender address
+    to: 'info@codegenius.io', // list of receivers
+    subject: 'Name: ' + req.body.name + ' From: ' + req.body.email, // Subject line
+    text: req.body.message // plaintext body
+  };
+  transporter.sendMail(mailOptions, function(error, info){
+    if(error){
+      return console.log(error);
+    }
+    console.log('Message sent: ' + info.response);
+    res.redirect('/');
+  });
+});
+
 router.get('/user', function(req, res) {
   res.render('userRegister', {});
 });
