@@ -16,6 +16,15 @@ userSchema = new Schema({
   language: String
 });
 
+expertSchema = new Schema({
+  email: String,
+  hash: String,
+  fname: String,
+  lname: String,
+  expertise: String,
+  language: String
+});
+
 renderGeneric = function(page, vars, res) {
   express().render(page + '.ejs', vars, function(err, html) {
     if(err) {
@@ -36,3 +45,4 @@ transporter = nodemailer.createTransport({
 });
 
 Users = mongoose.model('users', userSchema);
+Experts = mongoose.model('experts', expertSchema);
