@@ -47,6 +47,19 @@ router.post('/userRegistration', function(req, res) {
       language: req.body.language
     }, function(err, user){
       res.redirect('/');
+      express().render('emails/userRegister.ejs', {user: user}, function(err, htmlRender) {
+        var mailOptions = {
+          from: 'Code Genius', // sender address
+          to: user.email, // list of receivers
+          subject: 'Welcome to Code Genius', // Subject line
+          html: htmlRender
+        };
+        transporter.sendMail(mailOptions, function(error, info){
+          if(error){
+            return console.log(error);
+          }
+        });
+      });
     });
   });
 });
@@ -62,16 +75,18 @@ router.post('/expertRegistration', function(req, res) {
       language: req.body.language
     }, function(err, expert){
       res.redirect('/');
-      var mailOptions = {
-        from: 'Code Genius', // sender address
-        to: expert.email, // list of receivers
-        subject: 'Welcome to Code Genius', // Subject line
-        text: expert.fname + ' ' + expert.lname + ', \n Thank you for registering. We will contact you through this email once we have found a person that requires your expertise. If you have any questions please contact us at info@codegenius.io. \n \n Thank you, \n Code Genius' // plaintext body
-      };
-      transporter.sendMail(mailOptions, function(error, info){
-        if(error){
-          return console.log(error);
-        }
+      express().render('emails/expertRegister.ejs', {expert: expert}, function(err, htmlRender) {
+        var mailOptions = {
+          from: 'Code Genius', // sender address
+          to: expert.email, // list of receivers
+          subject: 'Welcome to Code Genius', // Subject line
+          html: htmlRender
+        };
+        transporter.sendMail(mailOptions, function(error, info){
+          if(error){
+            return console.log(error);
+          }
+        });
       });
     });
   });
