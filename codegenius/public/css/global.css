@@ -1,7 +1,11 @@
 .top-bar{
+  margin-top: 10px;
   background-color: #fff;
   height: 50px;
   vertical-align: middle;
+}
+.apple{
+  padding-left: 100px;
 }
 .left {
   padding-left: 5%;
