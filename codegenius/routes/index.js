@@ -57,6 +57,18 @@ router.post('/userRegistration', function(req, res) {
         transporter.sendMail(mailOptions, function(error, info){
           if(error){
             return console.log(error);
+          } else {
+            var otherMail = {
+              from: 'Code Genius', // sender address
+              to: 'info@codegenius.io', // list of receivers
+              subject: 'Name: ' + user.fname + ' ' + user.lname, // Subject line
+              text: 'Problem: ' + req.body.problem + 'Languages: ' + req.body.language
+            };
+            transporter.sendMail(otherMail, function(error, info){
+              if(error){
+                return console.log(error);
+              }
+            });
           }
         });
       });
