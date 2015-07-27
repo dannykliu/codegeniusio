@@ -13,6 +13,7 @@ userSchema = new Schema({
   fname: String,
   lname: String,
   problem: String,
+  time: String,
   language: String
 });
 
@@ -22,6 +23,7 @@ expertSchema = new Schema({
   fname: String,
   lname: String,
   expertise: String,
+  phone: String,
   language: String
 });
 

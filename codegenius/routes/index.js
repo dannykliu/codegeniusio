@@ -44,6 +44,7 @@ router.post('/userRegistration', function(req, res) {
       fname: req.body.fname,
       lname: req.body.lname,
       problem: req.body.problem,
+      time: req.body.time,
       language: req.body.language
     }, function(err, user){
       res.redirect('/');
@@ -62,7 +63,7 @@ router.post('/userRegistration', function(req, res) {
               from: 'Code Genius', // sender address
               to: 'info@codegenius.io', // list of receivers
               subject: 'Name: ' + user.fname + ' ' + user.lname, // Subject line
-              text: 'Problem: ' + req.body.problem + 'Languages: ' + req.body.language
+              text: 'Problem: ' + req.body.problem + ' Languages: ' + req.body.language + ' Hours: ' + user.time
             };
             transporter.sendMail(otherMail, function(error, info){
               if(error){
@@ -84,6 +85,7 @@ router.post('/expertRegistration', function(req, res) {
       fname: req.body.fname,
       lname: req.body.lname,
       expertise: req.body.expertise,
+      phone: req.body.phone,
       language: req.body.language
     }, function(err, expert){
       res.redirect('/');
