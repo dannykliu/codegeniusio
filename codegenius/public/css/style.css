@@ -2,6 +2,7 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,700,300,600,800,400);
 
 body, html{
+    overflow-x: hidden;
 	font-family: 'Lato', sans-serif;
 	text-rendering: optimizeLegibility !important;
 	-webkit-font-smoothing: antialiased !important;
@@ -74,7 +75,7 @@ ul, ol{
 }
 /* Navigation */
 #tf-menu {
-	padding: 20px;
+	padding: 20px, 20px, 20px, 20px;
 	transition: all 0.8s;
 }
 #tf-menu.navbar-default {
@@ -516,12 +517,12 @@ ol.type li a.active { font-weight: 700; }
 
 #testimonial .item p {
 	font-weight: 400;
-	margin: 30px 0;
+	margin: 20px 0;
 	color: #d1d1d1;
 }
 /* Contact Section */
 #tf-contact{
-	padding: 80px 0;
+	padding: 30px 0;
 }
 
 label {
@@ -626,11 +627,12 @@ nav#footer p{
   -ms-transition: background-color 0.3s linear;
   -o-transition: background-color 0.3s linear;
   transition: background-color 0.3s linear;
-  border-radius: 12px;
+  border-radius: 5px;
   color: #fff;
   font-size: 20px;
   padding: 10px 20px 10px 20px;
   margin-top: 30px;
+  margin-left: 30px;
   border: solid #fff 2px;
 }
 
@@ -639,7 +641,25 @@ nav#footer p{
   color: #000;
 }
 .register-wrapper {
-  padding-top: 5%
-    
-    ;
+  padding-top: 5%;
+}
+.users, .experts {
+  max-width: 45%;
+}
+.experts {
+  float: right;
+  text-align: left;
+}
+.experts h3 {
+  text-align: center;
+}
+.experts, .users ol li {
+  font-size: 16px;
+}
+.users {
+  float: left;
+  text-align: left;
+}
+.users h3 {
+  text-align: center;
 }

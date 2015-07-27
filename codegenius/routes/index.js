@@ -28,11 +28,15 @@ router.post('/contact', function(req, res) {
   });
 });
 
-router.get('/user', function(req, res) {
+router.get('/expertRegistration', function(req, res){
+  res.render("expertRegister.ejs", {});
+});
+
+router.get('/userRegistration', function(req, res) {
   res.render('userRegister', {});
 });
 
-router.post('/user', function(req, res) {
+router.post('/userRegistration', function(req, res) {
   // TODO: Check for duplicates
   bcrypt.hash(req.body.password.toString(), 10, function(err, hashpass) {
     Users.create({
@@ -40,11 +44,65 @@ router.post('/user', function(req, res) {
       hash: hashpass,
       fname: req.body.fname,
       lname: req.body.lname,
-      problem: req.body.probelm,
+      problem: req.body.problem,
+      time: req.body.time,
       language: req.body.language
     }, function(err, user){
-      console.log(user);
-      res.render('index', {});
+      res.redirect('/');
+      express().render('emails/userRegister.ejs', {user: user}, function(err, htmlRender) {
+        var mailOptions = {
+          from: 'Code Genius', // sender address
+          to: user.email, // list of receivers
+          subject: 'Welcome to Code Genius', // Subject line
+          html: htmlRender
+        };
+        transporter.sendMail(mailOptions, function(error, info){
+          if(error){
+            return console.log(error);
+          } else {
+            var otherMail = {
+              from: 'Code Genius', // sender address
+              to: 'info@codegenius.io', // list of receivers
+              subject: 'Name: ' + user.fname + ' ' + user.lname, // Subject line
+              text: 'Problem: ' + req.body.problem + ' Languages: ' + req.body.language + ' Hours: ' + user.time
+            };
+            transporter.sendMail(otherMail, function(error, info){
+              if(error){
+                return console.log(error);
+              }
+            });
+          }
+        });
+      });
+    });
+  });
+});
+
+router.post('/expertRegistration', function(req, res) {
+  bcrypt.hash(req.body.password.toString(), 10, function(err, hashpass) {
+    Experts.create({
+      email: req.body.email,
+      hash: hashpass,
+      fname: req.body.fname,
+      lname: req.body.lname,
+      expertise: req.body.expertise,
+      phone: req.body.phone,
+      language: req.body.language
+    }, function(err, expert){
+      res.redirect('/');
+      express().render('emails/expertRegister.ejs', {expert: expert}, function(err, htmlRender) {
+        var mailOptions = {
+          from: 'Code Genius', // sender address
+          to: expert.email, // list of receivers
+          subject: 'Welcome to Code Genius', // Subject line
+          html: htmlRender
+        };
+        transporter.sendMail(mailOptions, function(error, info){
+          if(error){
+            return console.log(error);
+          }
+        });
+      });
     });
   });
 });
