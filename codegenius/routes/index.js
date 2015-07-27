@@ -43,7 +43,7 @@ router.post('/userRegistration', function(req, res) {
       hash: hashpass,
       fname: req.body.fname,
       lname: req.body.lname,
-      problem: req.body.probelm,
+      problem: req.body.problem,
       language: req.body.language
     }, function(err, user){
       res.redirect('/');
