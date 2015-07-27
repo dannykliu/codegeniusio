@@ -42,9 +42,16 @@ sessionSchema = new Schema({
   hash: String
 });
 
+ticketSchema = new Schema({
+  userID: {type: mongoose.Schema.Types.ObjectId, ref: 'users'},
+  problem: String,
+  time: Number
+});
+
 Users = mongoose.model('users', userSchema);
 Experts = mongoose.model('experts', expertSchema);
 Sessions = mongoose.model('sessions', sessionSchema);
+Tickets = mongoose.model('tickets', ticketSchema);
 
 transporter = nodemailer.createTransport({
     service: 'Gmail',

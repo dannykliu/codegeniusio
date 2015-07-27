@@ -33,6 +33,7 @@ router.get('/user', function(req, res) {
 });
 
 router.post('/user', function(req, res) {
+  // TODO: Check for duplicates
   bcrypt.hash(req.body.password.toString(), 10, function(err, hashpass) {
     Users.create({
       email: req.body.email,
@@ -47,7 +48,7 @@ router.post('/user', function(req, res) {
     });
   });
 });
-  
+
 router.post('/git-update', function(req, res, next) {
   var hmac = 'sha1=' + crypto.createHmac('sha1', creds.git_secret).update(req.rawBody).digest('hex');
   if(req.headers['x-hub-signature'] == hmac) {
