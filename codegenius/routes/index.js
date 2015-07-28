@@ -112,6 +112,80 @@ router.post('/expertRegistration', function(req, res) {
   });
 });
 
+router.post('/signin', function(req, res, next) {
+  checkUser(req.body.email, req.body.pass, function);
+  res.cookie('hash', salt);
+  res.redirect('/');
+});
+
+var checkUser = function(email, pass, next) {
+  Users.findOne({email: email}, function(err, user) {
+    if(err) {
+      next(err);
+    } else if(user) {
+      bcrypt.compare(pass.toString(), user.hash, function(err, result) {
+        if(err) {
+          next(err);
+        } else if(result) {
+          bcrypt.genSalt(10, function(err, salt) {
+            if(err) {
+              next(err);
+            } else {
+              Sessions.create({userId: user.id, hash: salt.toString()}, function(err, session) {
+                if(err) {
+                  next(err);
+                } else {
+                  next(null, salt);
+                }
+              });
+            }
+          });
+        } else {
+          var err = 'Incorrect password.';
+          next(err);
+        }
+      });
+    } else {
+      var err = 'Account not found.';
+      next(err);
+    }
+  });
+};
+
+var checkExpert = function(email, pass, next) {
+  Experts.findOne({email: email}, function(err, user) {
+    if(err) {
+      next(err);
+    } else if(user) {
+      bcrypt.compare(pass.toString(), user.hash, function(err, result) {
+        if(err) {
+          next(err);
+        } else if(result) {
+          bcrypt.genSalt(10, function(err, salt) {
+            if(err) {
+              next(err);
+            } else {
+              Sessions.create({userId: user.id, hash: salt.toString()}, function(err, session) {
+                if(err) {
+                  next(err);
+                } else {
+                  next(null, salt);
+                }
+              });
+            }
+          });
+        } else {
+          var err = 'Incorrect password.';
+          next(err);
+        }
+      });
+    } else {
+      var err = 'Account not found.';
+      next(err);
+    }
+  });
+};
+
 router.post('/git-update', function(req, res, next) {
   var hmac = 'sha1=' + crypto.createHmac('sha1', creds.git_secret).update(req.rawBody).digest('hex');
   if(req.headers['x-hub-signature'] == hmac) {
