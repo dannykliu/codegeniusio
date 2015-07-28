@@ -35,7 +35,7 @@ expertSchema = new Schema({
   fname: String,
   lname: String,
   expertise: String,
-  phone: String,
+  rate: String,
   language: String
 });
 
