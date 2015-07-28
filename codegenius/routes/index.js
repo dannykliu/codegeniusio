@@ -85,7 +85,7 @@ router.post('/expertRegistration', function(req, res) {
       fname: req.body.fname,
       lname: req.body.lname,
       expertise: req.body.expertise,
-      phone: req.body.phone,
+      rate: req.body.rate,
       language: req.body.language
     }, function(err, expert){
       res.redirect('/');
