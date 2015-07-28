@@ -113,17 +113,23 @@ router.post('/expertRegistration', function(req, res) {
 });
 
 router.post('/signin', function(req, res, next) {
-  checkUser(req.body.email, req.body.pass, function);
-  res.cookie('hash', salt);
-  res.redirect('/');
+  if(req.body.email && req.body.pass) {
+    checkUser(req.body.email, req.body.pass, function(err) {
+      checkExpert(req.body.email, req.body.pass, function(err) {
+        res.render('sign-in', { error: 'Incorrect email or password.' });
+      });
+    });
+  } else {
+     res.render('sign-in', { error: 'All fields are required.' });
+  }
 });
 
-var checkUser = function(email, pass, next) {
-  Users.findOne({email: email}, function(err, user) {
+var checkUser = function(email, pass, res, next) {
+  Users.findOne({email: req.body.email}, function(err, user) {
     if(err) {
       next(err);
     } else if(user) {
-      bcrypt.compare(pass.toString(), user.hash, function(err, result) {
+      bcrypt.compare(req.body.pass.toString(), user.hash, function(err, result) {
         if(err) {
           next(err);
         } else if(result) {
@@ -135,29 +141,28 @@ var checkUser = function(email, pass, next) {
                 if(err) {
                   next(err);
                 } else {
-                  next(null, salt);
+                  res.cookie('hash', salt);
+                  res.redirect('/user');
                 }
               });
             }
           });
         } else {
-          var err = 'Incorrect password.';
-          next(err);
+          next(); // Incorrect pass
         }
       });
     } else {
-      var err = 'Account not found.';
-      next(err);
+      next(); // Incorrect email
     }
   });
 };
 
-var checkExpert = function(email, pass, next) {
-  Experts.findOne({email: email}, function(err, user) {
+var checkExpert = function(email, pass, res, next) {
+  Experts.findOne({email: req.body.email}, function(err, user) {
     if(err) {
       next(err);
     } else if(user) {
-      bcrypt.compare(pass.toString(), user.hash, function(err, result) {
+      bcrypt.compare(req.body.pass.toString(), user.hash, function(err, result) {
         if(err) {
           next(err);
         } else if(result) {
@@ -169,19 +174,18 @@ var checkExpert = function(email, pass, next) {
                 if(err) {
                   next(err);
                 } else {
-                  next(null, salt);
+                  res.cookie('hash', salt);
+                  res.redirect('/user');
                 }
               });
             }
           });
         } else {
-          var err = 'Incorrect password.';
-          next(err);
+          next(); // Incorrect pass
         }
       });
     } else {
-      var err = 'Account not found.';
-      next(err);
+      next(); // Incorrect email
     }
   });
 };
