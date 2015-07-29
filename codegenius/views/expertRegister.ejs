@@ -13,6 +13,12 @@
     </div>
   </div>
   <div class="container">
+   <% if(typeof error != 'undefined') { %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong>Error!</strong> <%= error %>
+    </div>
+  <% } %>
     <form action="/expertRegistration" method="post">
       <div class="form-group">
         <label for="exampleInputPassword1">First Name</label>

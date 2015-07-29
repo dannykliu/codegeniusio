@@ -43,73 +43,93 @@ router.get('/userRegistration', function(req, res) {
 
 router.post('/userRegistration', function(req, res) {
   // TODO: Check for duplicates
-  bcrypt.hash(req.body.password.toString(), 10, function(err, hashpass) {
-    Users.create({
-      email: req.body.email,
-      hash: hashpass,
-      fname: req.body.fname,
-      lname: req.body.lname,
-      problem: req.body.problem,
-      time: req.body.time,
-      language: req.body.language
-    }, function(err, user){
-      res.redirect('/');
-      express().render('emails/userRegister.ejs', {user: user}, function(err, htmlRender) {
-        var mailOptions = {
-          from: 'Code Genius', // sender address
-          to: user.email, // list of receivers
-          subject: 'Welcome to Code Genius', // Subject line
-          html: htmlRender
-        };
-        transporter.sendMail(mailOptions, function(error, info){
-          if(error){
-            return console.log(error);
-          } else {
-            var otherMail = {
-              from: 'Code Genius', // sender address
-              to: 'info@codegenius.io', // list of receivers
-              subject: 'Name: ' + user.fname + ' ' + user.lname, // Subject line
-              text: 'Problem: ' + req.body.problem + ' Languages: ' + req.body.language + ' Hours: ' + user.time
-            };
-            transporter.sendMail(otherMail, function(error, info){
-              if(error){
-                return console.log(error);
-              }
+  if(req.body.fname && req.body.lname && req.body.email && req.body.password) {
+    checkIfExists(req.body.email, req, function(err) {
+      if(err) {
+        res.render('userRegister', {error: 'Email already taken'});
+      } else {
+        bcrypt.hash(req.body.password.toString(), 10, function(err, hashpass) {
+          Users.create({
+            email: req.body.email,
+            hash: hashpass,
+            fname: req.body.fname,
+            lname: req.body.lname,
+            problem: req.body.problem,
+            time: req.body.time,
+            language: req.body.language
+          }, function(err, user){
+            res.redirect('/');
+            express().render('emails/userRegister.ejs', {user: user}, function(err, htmlRender) {
+              var mailOptions = {
+                from: 'Code Genius', // sender address
+                to: user.email, // list of receivers
+                subject: 'Welcome to Code Genius', // Subject line
+                html: htmlRender
+              };
+              transporter.sendMail(mailOptions, function(error, info){
+                if(error){
+                  return console.log(error);
+                } else {
+                  var otherMail = {
+                    from: 'Code Genius', // sender address
+                    to: 'info@codegenius.io', // list of receivers
+                    subject: 'Name: ' + user.fname + ' ' + user.lname, // Subject line
+                    text: 'Problem: ' + req.body.problem + ' Languages: ' + req.body.language + ' Hours: ' + user.time
+                  };
+                  transporter.sendMail(otherMail, function(error, info){
+                    if(error){
+                      return console.log(error);
+                    }
+                  });
+                }
+              });
             });
-          }
+          });
         });
-      });
+      }
     });
-  });
+  } else {
+    res.render('userRegister', {error: 'All forms must be filled'});
+  }
 });
 
 router.post('/expertRegistration', function(req, res) {
-  bcrypt.hash(req.body.password.toString(), 10, function(err, hashpass) {
-    Experts.create({
-      email: req.body.email,
-      hash: hashpass,
-      fname: req.body.fname,
-      lname: req.body.lname,
-      expertise: req.body.expertise,
-      rate: req.body.rate,
-      language: req.body.language
-    }, function(err, expert){
-      res.redirect('/');
-      express().render('emails/expertRegister.ejs', {expert: expert}, function(err, htmlRender) {
-        var mailOptions = {
-          from: 'Code Genius', // sender address
-          to: expert.email, // list of receivers
-          subject: 'Welcome to Code Genius', // Subject line
-          html: htmlRender
-        };
-        transporter.sendMail(mailOptions, function(error, info){
-          if(error){
-            return console.log(error);
-          }
+  if(req.body.fname && req.body.lname && req.body.email && req.body.password && req.body.rate && req.body.expertise && req.body.language) {
+    checkIfExists(req.body.email, req, function(err) {
+      if(err) {
+        res.render('expertRegister', {error: 'Email already taken'});
+      } else {
+        bcrypt.hash(req.body.password.toString(), 10, function(err, hashpass) {
+          Experts.create({
+            email: req.body.email,
+            hash: hashpass,
+            fname: req.body.fname,
+            lname: req.body.lname,
+            expertise: req.body.expertise,
+            rate: req.body.rate,
+            language: req.body.language
+          }, function(err, expert){
+            res.redirect('/');
+            express().render('emails/expertRegister.ejs', {expert: expert}, function(err, htmlRender) {
+              var mailOptions = {
+                from: 'Code Genius', // sender address
+                to: expert.email, // list of receivers
+                subject: 'Welcome to Code Genius', // Subject line
+                html: htmlRender
+              };
+              transporter.sendMail(mailOptions, function(error, info){
+                if(error){
+                  return console.log(error);
+                }
+              });
+            });
+          });
         });
-      });
+      }
     });
-  });
+  } else {
+    res.render('expertRegister', {error: 'All forms must be filled'});
+  }
 });
 
 router.get('/signin', function(req, res, next) {
@@ -202,6 +222,20 @@ var checkExpert = function(email, pass, req, res, next) {
     } else {
       next(); // Incorrect email
     }
+  });
+};
+
+// Checks if the email is already registered
+var checkIfExists = function(email, req, cb) {
+  Users.findOne({ email: email }, function(err, user) {
+    Experts.findOne({ email: email }, function(err, expert) {
+      if(expert || user) {
+        var err = 'Email already exists';
+        cb(err);
+      } else {
+        cb();
+      }
+    });
   });
 };
 
