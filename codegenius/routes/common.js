@@ -3,13 +3,13 @@ creds   = require('../credentials');
 nodemailer = require('nodemailer');
 
 // Basic Render Function
-renderGeneric = function(page, vars, res) {
-  express().render(page + '.ejs', vars, function(err, html) {
+renderUserGeneric = function(page, vars, res) {
+  express().render('users/' + page + '.ejs', vars, function(err, html) {
     if(err) {
       console.log(err);
     } else {
       vars.content = html;
-      res.render('genericDash', vars);
+      res.render('users/genericDash', vars);
     }
   });
 };

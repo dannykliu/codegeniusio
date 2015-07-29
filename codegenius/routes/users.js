@@ -6,7 +6,7 @@ var render = function(page, options, res) {
     case 'dashboard':
       break;
   }
-  renderGeneric(page, options, res);
+  renderUserGeneric(page, options, res);
 }
 
 router.use('/', forceLogIn);
