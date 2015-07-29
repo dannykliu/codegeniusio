@@ -47,7 +47,7 @@ a{ color: #FDE500;}
 a:hover,
 a:focus{
 	text-decoration: none;
-	color: #FDE500;
+	color: #703923;
 }
 
 .section-title hr{
@@ -200,6 +200,17 @@ a.fa.fa-angle-down:hover{
   text-decoration: none;
 }
 
+/*Genius Section*/
+#screenshot-carousel {
+  height: 440px;
+  width: 400px;
+}
+#screenshot-carousel * {
+  background-image: none !important;
+}
+.alignMe{
+  margin-top: 10px;
+}
 
 /* About Section */
 #tf-about{
@@ -532,7 +543,7 @@ label {
 	font-family: 'Open Sans', sans-serif;
 }
 #tf-contact .form-control {
-	display: block;
+	display: inline-block;
 	width: 100%;
 	padding: 6px 12px;
 	font-size: 14px;
