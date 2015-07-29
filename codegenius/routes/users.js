@@ -9,6 +9,7 @@ var render = function(page, options, res) {
   renderGeneric(page, options, res);
 }
 
+router.use('/', forceLogIn);
 /* GET users listing. */
 router.get('/', function(req, res) {
   render('dashboard', {}, res);

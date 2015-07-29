@@ -7,9 +7,14 @@ var exec = require('child_process').exec;
 creds = require('../credentials');
 require('./common');
 
+router.use('/', logIn);
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', {});
+  if(req.user) {
+    next();
+  } else {
+    res.render('index', {});
+  }
 });
 
 router.post('/contact', function(req, res) {
@@ -112,10 +117,14 @@ router.post('/expertRegistration', function(req, res) {
   });
 });
 
+router.get('/signin', function(req, res, next) {
+  res.render('sign-in', {});
+});
+
 router.post('/signin', function(req, res, next) {
   if(req.body.email && req.body.pass) {
-    checkUser(req.body.email, req.body.pass, function(err) {
-      checkExpert(req.body.email, req.body.pass, function(err) {
+    checkUser(req.body.email, req.body.pass, req, res, function(err) {
+      checkExpert(req.body.email, req.body.pass, req, res, function(err) {
         res.render('sign-in', { error: 'Incorrect email or password.' });
       });
     });
@@ -124,7 +133,7 @@ router.post('/signin', function(req, res, next) {
   }
 });
 
-var checkUser = function(email, pass, res, next) {
+var checkUser = function(email, pass, req, res, next) {
   Users.findOne({email: req.body.email}, function(err, user) {
     if(err) {
       next(err);
@@ -157,7 +166,7 @@ var checkUser = function(email, pass, res, next) {
   });
 };
 
-var checkExpert = function(email, pass, res, next) {
+var checkExpert = function(email, pass, req, res, next) {
   Experts.findOne({email: req.body.email}, function(err, user) {
     if(err) {
       next(err);
@@ -175,7 +184,7 @@ var checkExpert = function(email, pass, res, next) {
                   next(err);
                 } else {
                   res.cookie('hash', salt);
-                  res.redirect('/user');
+                  res.redirect('/expert');
                 }
               });
             }

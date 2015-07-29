@@ -71,3 +71,42 @@ transporter = nodemailer.createTransport({
         pass: creds.email_pass
     }
 });
+
+// if req.cookies.hash matches a session, populates req.user
+logIn = function(req, res, next) {
+  logInLogic(req, res, next, function() {
+    next();
+  });
+};
+
+var logInLogic = function(req, res, next, cb) {
+  Sessions.findOne({hash: req.cookies.hash}, function(err, session) {
+    if(err) {
+      next(err);
+    } else if(session) {
+      req.user = {id: session.userId};
+      Users.findById(session.userId, function(err, userr) {
+        if(err) {
+          next(err);
+        } else {
+          req.user = userr;
+          cb();
+        }
+      });
+    } else {
+      // don't populate anything
+      cb();
+    }
+  });
+};
+
+// wrapper for logIn that redirects user to '/' on authentication failure
+forceLogIn = function(req, res, next) {
+  logInLogic(req, res, next, function() {
+    if(req.user) {
+      next();
+    } else {
+      res.redirect('/');
+    }
+  });
+};
