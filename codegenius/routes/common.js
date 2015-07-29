@@ -56,7 +56,8 @@ sessionSchema = new Schema({
 ticketSchema = new Schema({
   userID: {type: mongoose.Schema.Types.ObjectId, ref: 'users'},
   problem: String,
-  time: Number
+  time: Number,
+  language: String
 });
 
 Users = mongoose.model('users', userSchema);
