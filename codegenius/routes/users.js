@@ -28,6 +28,17 @@ router.post('/ticket', function(req, res) {
       language: language
     }, function(err, ticket) {
       res.redirect('/user?alert=1');
+      var otherMail = {
+        from: 'Code Genius', // sender address
+        to: 'info@codegenius.io', // list of receivers
+        subject: 'Ticket Submitted Name: ' + req.user.fname + ' ' + req.user.lname, // Subject line
+        text: 'Problem: ' + problem + ' Languages: ' + language + ' Hours: ' + time
+      };
+      transporter.sendMail(otherMail, function(error, info){
+        if(error){
+          return console.log(error);
+        }
+      });
     });
   } else {
     res.redirect('/user?alert=2');
