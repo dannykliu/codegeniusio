@@ -7,14 +7,9 @@ var exec = require('child_process').exec;
 creds = require('../credentials');
 require('./common');
 
-router.use('/', logIn);
 /* GET home page. */
-router.get('/', function(req, res) {
-  if(req.user) {
-    next();
-  } else {
-    res.render('index', {});
-  }
+router.get('/', function(req, res, next) {
+  res.render('index', {});
 });
 
 router.post('/contact', function(req, res) {
