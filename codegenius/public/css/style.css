@@ -532,7 +532,7 @@ label {
 	font-family: 'Open Sans', sans-serif;
 }
 #tf-contact .form-control {
-	display: block;
+	display: inline-block;
 	width: 100%;
 	padding: 6px 12px;
 	font-size: 14px;
