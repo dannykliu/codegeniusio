@@ -128,6 +128,17 @@ router.post('/signin', function(req, res, next) {
   }
 });
 
+router.get('/signout', function(req, res, next) {
+  Sessions.findOneAndRemove({hash: req.cookies.hash}, function(err) {
+    if(err) {
+      next(err);
+    } else {
+      res.clearCookie('hash');
+      res.redirect('/');
+    }
+  });
+});
+
 var checkUser = function(email, pass, req, res, next) {
   Users.findOne({email: req.body.email}, function(err, user) {
     if(err) {
