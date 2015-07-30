@@ -58,8 +58,8 @@ background: -moz-linear-gradient(top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.73) 17%, 
   text-transform: uppercase;
 }
 
-a:hover{
- color: #FDE500;
+.right a:hover{
+ color: #FDE500 !important;
 }
 .right {
   width: 20%;
