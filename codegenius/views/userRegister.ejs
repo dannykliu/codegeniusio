@@ -7,14 +7,25 @@
 </head>
 <link rel="stylesheet" href="css/global.css">
 <body>
+
+ <div class="wrapper">
+ <div class="overlay">
   <div class="row top-bar">
       <div class="left">
       <a href="/" class=""><img src="img/logo.svg" id="logo" alt="Logo" align="middle"></a>
       </div>
+    <h4 class="row-brand"><a href="/" class="row-brand" style="text-decoration: none;">Code Genius</a></h4>
   </div>
+      <div style="margin-top: 60px;">
+              <center>
+              <h1 style="color: #e0e0e0;">Sign Up to be a User</h1>
+              </center>
+          <br>
+      </div>
   <div class="row">
 
   </div>
+  <center>
   <form action="/userRegistration" method="post">
     <div class="container">
      <% if(typeof error != 'undefined') { %>
@@ -39,9 +50,13 @@
         <label for="exampleInputPassword1">Password</label>
         <input type="password" name="password" class="form-control" placeholder="Password">
       </div>
-      <button type="submit" class="btn btn-default">Submit</button>
+      <br>
+      <button type="submit" class="btn btn-default">Sign Up</button>
     </div>
   </form>
+   </center>
+  </div>
+  </div>
   <script src="js/jquery-2.1.4.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </body>
