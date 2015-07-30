@@ -1,1 +1,17 @@
-<h2>Home</h2>
+<% if(typeof tickets != 'undefined') { %>
+  <% for(var i=0; i<tickets.length; i++) { %>
+  <div class="card-wrapper">
+    <div class="card">
+      <div class="row problem">
+        <h3> Problem: </h3>
+        <p> <%= tickets[i].problem %> </p>
+      </div>
+      <div class="row info">
+        <h4> <b>Language: </b><%= tickets[i].language %></h4>
+        <h4> <b>Time: </b><%= tickets[i].time %> hours</h4>
+        <a href="ticket/<%= tickets[i].id %>">Claim</a>
+      </div>
+    </div>
+  </div>
+  <% } %>
+<% } %>
