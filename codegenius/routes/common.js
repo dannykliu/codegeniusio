@@ -39,15 +39,6 @@ expertSchema = new Schema({
   language: String
 });
 
-expertSchema = new Schema({
-  email: String,
-  hash: String,
-  fname: String,
-  lname: String,
-  language: String,
-  aoi: String
-});
-
 sessionSchema = new Schema({
   userId: String,
   hash: String

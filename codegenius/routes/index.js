@@ -82,11 +82,13 @@ router.post('/userRegistration', function(req, res) {
 });
 
 router.post('/expertRegistration', function(req, res) {
+  console.log(req.body.expertise);
   if(req.body.fname && req.body.lname && req.body.email && req.body.password && req.body.rate && req.body.expertise && req.body.language) {
     checkIfExists(req.body.email, req, function(err) {
       if(err) {
         res.render('expertRegister', {error: 'Email already taken'});
       } else {
+        console.log(req.body.expertise);
         bcrypt.hash(req.body.password.toString(), 10, function(err, hashpass) {
           Experts.create({
             email: req.body.email,
@@ -98,6 +100,7 @@ router.post('/expertRegistration', function(req, res) {
             language: req.body.language
           }, function(err, expert){
             res.redirect('/');
+            console.log(expert);
             express().render('emails/expertRegister.ejs', {expert: expert}, function(err, htmlRender) {
               var mailOptions = {
                 from: 'Code Genius', // sender address
