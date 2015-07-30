@@ -16,3 +16,5 @@ router.use('/', forceLogIn);
 router.get('/', function(req, res) {
   render('home', {alert: req.query.alert}, res);
 });
+
+module.exports = router;

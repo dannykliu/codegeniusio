@@ -101,9 +101,19 @@ var logInLogic = function(req, res, next, cb) {
       Users.findById(session.userId, function(err, userr) {
         if(err) {
           next(err);
-        } else {
+        } else if(userr) {
           req.user = userr;
           cb();
+        } else {
+          // Not User must be expert
+          Experts.findById(session.userId, function(err, expert) {
+            if(err) {
+              next(err);
+            } else {
+              req.user = expert;
+              cb();
+            }
+          });
         }
       });
     } else {
