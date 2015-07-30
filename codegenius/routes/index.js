@@ -122,9 +122,9 @@ router.get('/signin', function(req, res, next) {
 router.post('/signin', function(req, res, next) {
   if(req.body.email && req.body.pass) {
     checkUser(req.body.email, req.body.pass, req, res, function(err) {
-      checkExpert(req.body.email, req.body.pass, req, res, function(err) {
+      //checkExpert(req.body.email, req.body.pass, req, res, function(err) {
         res.render('sign-in', { error: 'Incorrect email or password.' });
-      });
+      //});
     });
   } else {
      res.render('sign-in', { error: 'All fields are required.' });
