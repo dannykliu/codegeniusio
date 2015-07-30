@@ -20,4 +20,19 @@ router.get('/', function(req, res) {
   });
 });
 
+router.get('/ticket/:id', function(req, res) {
+  Tickets.findById(req.params.id, function(err, ticket) {
+    var mailOptions = {
+      from: 'Code Genius', // sender address
+      to: 'info@codegenius.io', // list of receivers
+      subject: 'Ticket claimed', // Subject line
+      text: 'Problem: ' + ticket.problem
+    };
+    transporter.sendMail(mailOptions, function(error, info){
+      if(error){
+        return console.log(error);
+      }
+    });
+  });
+});
 module.exports = router;
