@@ -58,7 +58,7 @@ router.post('/userRegistration', function(req, res) {
             time: req.body.time,
             language: req.body.language
           }, function(err, user){
-            res.redirect('/');
+            res.redirect('/signin');
             express().render('emails/userRegister.ejs', {user: user}, function(err, htmlRender) {
               var mailOptions = {
                 from: 'Code Genius', // sender address
