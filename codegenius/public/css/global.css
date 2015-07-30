@@ -1,15 +1,47 @@
+/*Hides the overflow on the left!*/
+body, html{
+  overflow-x: hidden;
+}
+.wrapper{
+  background: url(/img/stock.jpg);
+  background-size: cover;
+  width: 100%;
+  height: 150%;
+  top: 0;
+  left: 0;
+  color: #cfcfcf;
+}
+
+.row-brand {
+    text-transform: uppercase;
+    font-size: 22px;
+    color: #fff;
+    font-weight: 900;
+    margin-top: 13px;
+}
+.overlay{
+background: -moz-linear-gradient(top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.73) 17%, rgba(0,0,0,0.66) 35%, rgba(0,0,0,0.55) 62%, rgba(0,0,0,0.4) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.8)), color-stop(17%,rgba(0,0,0,0.73)), color-stop(35%,rgba(0,0,0,0.66)), color-stop(62%,rgba(0,0,0,0.55)), color-stop(100%,rgba(0,0,0,0.4)));
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.73) 17%,rgba(0,0,0,0.66) 35%,rgba(0,0,0,0.55) 62%,rgba(0,0,0,0.4) 100%);
+    background: -o-linear-gradient(top, rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.73) 17%,rgba(0,0,0,0.66) 35%,rgba(0,0,0,0.55) 62%,rgba(0,0,0,0.4) 100%);
+    background: -ms-linear-gradient(top, rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.73) 17%,rgba(0,0,0,0.66) 35%,rgba(0,0,0,0.55) 62%,rgba(0,0,0,0.4) 100%);
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.73) 17%,rgba(0,0,0,0.66) 35%,rgba(0,0,0,0.55) 62%,rgba(0,0,0,0.4) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', endColorstr='#66000000',GradientType=0 );
+    height: 900px;
+    background-attachment: fixed;
+}
 .top-bar{
-  margin-top: 10px;
   background-color: #fff;
   height: 50px;
   vertical-align: middle;
+  background-color: #222;
 }
 .apple{
   padding-left: 100px;
 }
 .left {
   padding-left: 5%;
-  width: 25%;
+  width: 9%;
   float: left;
   font-family: Lato, sans-serif;
   font-size: 22px;
@@ -17,6 +49,7 @@
   line-height: 20px;
   height: 100%;
 }
+
 .left a, .right a {
   color: black;
   text-decoration: none;
@@ -24,8 +57,9 @@
   line-height: 50px;
   text-transform: uppercase;
 }
-.left a:hover, .right a:hover {
- color: #494EA1;
+
+a:hover{
+ color: #FDE500;
 }
 .right {
   width: 20%;
@@ -53,6 +87,7 @@
   -webkit-transition: none;
   -o-transition: none;
   transition: none;
+  width: 400px;
 }
 .form-control:focus {
   border-color: inherit;
