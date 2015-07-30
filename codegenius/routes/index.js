@@ -28,11 +28,6 @@ router.post('/contact', function(req, res) {
   });
 });
 
-/*GET expert/user registration page*/
-router.get('/expert', function(req, res){
-  res.render("expertRegister.ejs", {});
-});
-
 router.get('/expertRegistration', function(req, res){
   res.render("expertRegister.ejs", {});
 });

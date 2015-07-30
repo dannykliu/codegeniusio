@@ -14,6 +14,18 @@ renderUserGeneric = function(page, vars, res) {
   });
 };
 
+renderExpertGeneric = function(page, vars, res) {
+  express().render('experts/' + page + '.ejs', vars, function(err, html) {
+    if(err) {
+      console.log(err);
+    } else {
+      vars.content = html;
+      res.render('experts/genericDash', vars);
+    }
+  });
+};
+
+
 // Sets up mongoose
 mongoose = require('mongoose');
 Schema = mongoose.Schema;
