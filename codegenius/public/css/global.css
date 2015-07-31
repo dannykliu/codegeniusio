@@ -106,7 +106,7 @@ background: -moz-linear-gradient(top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.73) 17%, 
   -moz-box-shadow: 11px 10px 14px 1px rgba(0,0,0,0.32);
   box-shadow: 11px 10px 14px 1px rgba(0,0,0,0.64);
   border-style: solid;
-  border-radius: 10px;
+  border-width: 1px;
   background-color: #fafafa;
   border-color: #616161;
 }
@@ -129,4 +129,8 @@ background: -moz-linear-gradient(top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.73) 17%, 
 }
 .wrap{
   width: 1100px;
+}
+.goLeft{
+  float: right;
+  margin-right: 50px;
 }
