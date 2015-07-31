@@ -1,0 +1,19 @@
+<script src='/js/adapter.js'></script>
+
+<script src="http://simplewebrtc.com/latest.js"></script>
+
+<div id="localVideo" muted></div>
+<div id="remoteVideo"></div>
+
+
+<script>
+var webrtc = new SimpleWebRTC({
+	localVideoEl: 'localVideo',
+	remoteVideosEl: 'remoteVideo',
+	autoRequestMedia: true
+});
+
+webrtc.on('readyToCall', function () {
+	webrtc.joinRoom('Test');
+});
+</script>

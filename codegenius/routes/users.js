@@ -5,6 +5,8 @@ var render = function(page, options, res) {
   switch(page) {
     case 'dashboard':
       break;
+    case 'live':
+      break;
   }
   renderUserGeneric(page, options, res);
 }
@@ -45,4 +47,7 @@ router.post('/ticket', function(req, res) {
   }
 });
 
+router.get('/live', function(req, res) {
+  render('live', {}, res);
+});
 module.exports = router;
