@@ -53,7 +53,6 @@ router.post('/userRegistration', function(req, res) {
             time: req.body.time,
             language: req.body.language
           }, function(err, user){
-            console.log(req.body.password);
             checkUser(user.email, req.body.password, req, res, function(err) {
               express().render('emails/userRegister.ejs', {user: user}, function(err, htmlRender) {
                 var mailOptions = {
@@ -96,19 +95,19 @@ router.post('/expertRegistration', function(req, res) {
             rate: req.body.rate,
             language: req.body.language
           }, function(err, expert){
-            res.redirect('/');
-            console.log(expert);
-            express().render('emails/expertRegister.ejs', {expert: expert}, function(err, htmlRender) {
-              var mailOptions = {
-                from: 'Code Genius', // sender address
-                to: expert.email, // list of receivers
-                subject: 'Welcome to Code Genius', // Subject line
-                html: htmlRender
-              };
-              transporter.sendMail(mailOptions, function(error, info){
-                if(error){
-                  return console.log(error);
-                }
+            checkExpert(expert.email, req.body.password, req, res, function(err){
+              express().render('emails/expertRegister.ejs', {expert: expert}, function(err, htmlRender) {
+                var mailOptions = {
+                  from: 'Code Genius', // sender address
+                  to: expert.email, // list of receivers
+                  subject: 'Welcome to Code Genius', // Subject line
+                  html: htmlRender
+                };
+                transporter.sendMail(mailOptions, function(error, info){
+                  if(error){
+                    return console.log(error);
+                  }
+                });
               });
             });
           });
@@ -185,7 +184,7 @@ var checkExpert = function(email, pass, req, res, next) {
     if(err) {
       next(err);
     } else if(user) {
-      bcrypt.compare(req.body.pass.toString(), user.hash, function(err, result) {
+      bcrypt.compare(pass.toString(), user.hash, function(err, result) {
         if(err) {
           next(err);
         } else if(result) {
