@@ -1,3 +1,4 @@
+
 <div class="tickets">
  <% if(typeof tickets != 'undefined') { %>
   <% for(var i=0; i<tickets.length; i++) { %>
@@ -5,11 +6,11 @@
     <div class="card">
       <div class="row problem">
         <h3> Problem: </h3>
-        <p> <%= tickets[i].problem %> </p>
+        <p class="wrap"> <%= tickets[i].problem %> </p>
       </div>
       <div class="row info">
-        <h4> <b>Language: </b><%= tickets[i].language %></h4>
-        <h4> <b>Time: </b><%= tickets[i].time %> hours</h4>
+        <h4> <b>Language: </b><%= " " + tickets[i].language %></h4>
+        <h4> <b>Time: </b><%= " " +tickets[i].time %> hours</h4>
         <a class="claim" href="expert/ticket/<%= tickets[i].id %>">Claim</a>
       </div>
     </div>
