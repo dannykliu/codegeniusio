@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+require('./common');
+
 var render = function(page, options, res) {
   switch(page) {
     case 'dashboard':

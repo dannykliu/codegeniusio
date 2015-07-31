@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Code Genius</title>
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <%
+      if(typeof css != 'undefined') {
+        for(i in css) {
+    %>
+          <link href="/css/<%= css[i] %>.css" rel="stylesheet">
+    <%
+        }
+      }
+  %>
+</head>
+<body>
+  <div class="row top-bar">
+    <div class="left">
+      <a href="/" class=""><img src="img/logo.svg" id="logo" alt="Logo" align="middle"></a>
+    </div>
+    <div class="right">
+      <a href="/signout">Sign out</a>
+    </div>
+  </div>
+  <div class="container">
+    <%- content %>
+  </div>
+  <script src="/js/jquery-2.1.4.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <%
+      if(typeof js != 'undefined') {
+        for(i in js) {
+    %>
+          <script src="/js/<%= js[i] %>.js"></script>
+    <%
+        }
+      }
+  %>
+</body>
+</html>
