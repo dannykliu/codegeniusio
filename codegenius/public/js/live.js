@@ -19,3 +19,13 @@ editor.on('change', function() {
         });
     }
 });
+
+var webrtc = new SimpleWebRTC({
+	localVideoEl: 'localVideo',
+	remoteVideosEl: 'remoteVideo',
+	autoRequestMedia: true
+});
+
+webrtc.on('readyToCall', function () {
+	webrtc.joinRoom('Test');
+});

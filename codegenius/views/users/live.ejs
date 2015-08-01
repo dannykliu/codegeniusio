@@ -14,26 +14,13 @@
 }
 </div>
 
-<script src="/js/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
-<script src="/socket.io/socket.io.js"></script>
-
-<script src="/js/live.js" type="text/javascript" charset="utf-8"></script>
-<script src='/js/adapter.js'></script>
-
-<script src="http://simplewebrtc.com/latest.js"></script>
-
 <div id="localVideo" muted></div>
 <div id="remoteVideo"></div>
 
+<script src="/js/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="/socket.io/socket.io.js"></script>
 
-<script>
-var webrtc = new SimpleWebRTC({
-	localVideoEl: 'localVideo',
-	remoteVideosEl: 'remoteVideo',
-	autoRequestMedia: true
-});
+<script src='/js/adapter.js'></script>
 
-webrtc.on('readyToCall', function () {
-	webrtc.joinRoom('Test');
-});
-</script>
+<script src="http://simplewebrtc.com/latest.js"></script>
+<script src="/js/live.js" type="text/javascript" charset="utf-8"></script>
