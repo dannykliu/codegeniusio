@@ -1,5 +1,8 @@
-var express = require('express');
+var express = require('express.io');
+var app = express();
+app.http().io();
 var path = require('path');
+var http = require('http');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -8,7 +11,19 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
-var app = express();
+//require('sockets')(io);
+
+//io.configure(function () {
+//    io.set("transports", ["xhr-polling"]);
+//    io.set("polling duration", 10);
+//});
+
+//io.sockets.on('connection', function (socket) {
+//    // Relay chat data to all clients
+//  socket.on('editorUpdate', function(data) {
+//      socket.broadcast.emit('editorUpdate', data);
+//  });
+//});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -59,6 +74,13 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
+
+// This realtime route will handle the realtime request
+app.io.route('editorUpdate', function(req) {
+    console.log(req.data);
+    req.io.broadcast('editorUpdate', req.data);
+});
+
 
 
 module.exports = app;

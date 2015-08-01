@@ -50,4 +50,5 @@ router.post('/ticket', function(req, res) {
 router.get('/live', function(req, res) {
   render('live', {}, res);
 });
+
 module.exports = router;
