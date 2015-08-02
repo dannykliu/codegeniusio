@@ -28,11 +28,6 @@ router.post('/contact', function(req, res) {
   });
 });
 
-/*GET expert/user registration page*/
-router.get('/expert', function(req, res){
-  res.render("expertRegister.ejs", {});
-});
-
 router.get('/expertRegistration', function(req, res){
   res.render("expertRegister.ejs", {});
 });
@@ -58,18 +53,19 @@ router.post('/userRegistration', function(req, res) {
             time: req.body.time,
             language: req.body.language
           }, function(err, user){
-            res.redirect('/signin');
-            express().render('emails/userRegister.ejs', {user: user}, function(err, htmlRender) {
-              var mailOptions = {
-                from: 'Code Genius', // sender address
-                to: user.email, // list of receivers
-                subject: 'Welcome to Code Genius', // Subject line
-                html: htmlRender
-              };
-              transporter.sendMail(mailOptions, function(error, info){
-                if(error){
-                  return console.log(error);
-                }
+            checkUser(user.email, req.body.password, req, res, function(err) {
+              express().render('emails/userRegister.ejs', {user: user}, function(err, htmlRender) {
+                var mailOptions = {
+                  from: 'Code Genius', // sender address
+                  to: user.email, // list of receivers
+                  subject: 'Welcome to Code Genius', // Subject line
+                  html: htmlRender
+                };
+                transporter.sendMail(mailOptions, function(error, info){
+                  if(error){
+                    return console.log(error);
+                  }
+                });
               });
             });
           });
@@ -99,19 +95,19 @@ router.post('/expertRegistration', function(req, res) {
             rate: req.body.rate,
             language: req.body.language
           }, function(err, expert){
-            res.redirect('/');
-            console.log(expert);
-            express().render('emails/expertRegister.ejs', {expert: expert}, function(err, htmlRender) {
-              var mailOptions = {
-                from: 'Code Genius', // sender address
-                to: expert.email, // list of receivers
-                subject: 'Welcome to Code Genius', // Subject line
-                html: htmlRender
-              };
-              transporter.sendMail(mailOptions, function(error, info){
-                if(error){
-                  return console.log(error);
-                }
+            checkExpert(expert.email, req.body.password, req, res, function(err){
+              express().render('emails/expertRegister.ejs', {expert: expert}, function(err, htmlRender) {
+                var mailOptions = {
+                  from: 'Code Genius', // sender address
+                  to: expert.email, // list of receivers
+                  subject: 'Welcome to Code Genius', // Subject line
+                  html: htmlRender
+                };
+                transporter.sendMail(mailOptions, function(error, info){
+                  if(error){
+                    return console.log(error);
+                  }
+                });
               });
             });
           });
@@ -130,9 +126,9 @@ router.get('/signin', function(req, res, next) {
 router.post('/signin', function(req, res, next) {
   if(req.body.email && req.body.pass) {
     checkUser(req.body.email, req.body.pass, req, res, function(err) {
-      //checkExpert(req.body.email, req.body.pass, req, res, function(err) {
+      checkExpert(req.body.email, req.body.pass, req, res, function(err) {
         res.render('sign-in', { error: 'Incorrect email or password.' });
-      //});
+      });
     });
   } else {
      res.render('sign-in', { error: 'All fields are required.' });
@@ -155,7 +151,7 @@ var checkUser = function(email, pass, req, res, next) {
     if(err) {
       next(err);
     } else if(user) {
-      bcrypt.compare(req.body.pass.toString(), user.hash, function(err, result) {
+      bcrypt.compare(pass.toString(), user.hash, function(err, result) {
         if(err) {
           next(err);
         } else if(result) {
@@ -188,7 +184,7 @@ var checkExpert = function(email, pass, req, res, next) {
     if(err) {
       next(err);
     } else if(user) {
-      bcrypt.compare(req.body.pass.toString(), user.hash, function(err, result) {
+      bcrypt.compare(pass.toString(), user.hash, function(err, result) {
         if(err) {
           next(err);
         } else if(result) {
