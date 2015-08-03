@@ -6,6 +6,9 @@ editor.getSession().setMode("ace/mode/javascript");
 
 // Live editing
 var socket = io.connect();
+var room = 'room';
+socket.emit('createRoom', room);
+
 socket.on('editorUpdate', function (data) {
     editor.setByAPI = true;
     editor.setValue(data.contents);
@@ -16,7 +19,8 @@ socket.on('editorUpdate', function (data) {
 editor.on('change', function() {
     if (!editor.setByAPI) {
         socket.emit('editorUpdate', {
-            contents:editor.getValue()
+          contents:editor.getValue(),
+          room: room
         });
     }
 });

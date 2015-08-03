@@ -79,10 +79,15 @@ app.use(function(err, req, res, next) {
 
 // This realtime route will handle the realtime request
 app.io.route('editorUpdate', function(req) {
-    console.log(req.data);
-    req.io.broadcast('editorUpdate', req.data);
+    console.log('editor change triggered');
+    req.io.room(req.data.room).broadcast('editorUpdate', req.data);
 });
 
-
+app.io.route('createRoom', function(req) {
+  console.log('joining room');
+  req.io.join(req.data);
+  req.room = req.data
+  console.log(req.room);
+});
 
 module.exports = app;
