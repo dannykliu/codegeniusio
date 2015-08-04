@@ -91,7 +91,7 @@ app.io.route('createRoom', function(req) {
 });
 
 app.io.route('shareLink', function(req) {
-    req.io.room(req.data.room).broadcast('shareLink', req.data);
+  req.io.room(req.data.room).broadcast('shareLink', req.data.contents);
 });
 
 
