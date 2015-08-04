@@ -62,6 +62,93 @@ webrtc.on('videoRemoved', function (video, peer) {
     }
 });
 
+webrtc.on('createdPeer', function (peer) {
+  console.log('peer: ' + peer);
+
+  // Select and send file
+  var fileinput = document.getElementById('fileinput');
+  console.log(fileinput);
+  fileinput.addEventListener('change', function() {
+    console.log('file added');
+    fileinput.disabled = true;
+
+    var file = fileinput.files[0];
+    var sender = peer.sendFile(file);
+  });
+
+  // receiving an incoming filetransfer
+  peer.on('fileTransfer', function (metadata, receiver) {
+    console.log('incoming filetransfer', metadata.name, metadata);
+    receiver.on('progress', function (bytesReceived) {
+      console.log('receive progress', bytesReceived, 'out of', metadata.size);
+    });
+    // get notified when file is done
+    receiver.on('receivedFile', function (file, metadata) {
+      console.log('received file', metadata.name, metadata.size);
+
+      href = $('#download');
+      href.attr('href', URL.createObjectURL(file));
+      href.attr('download', metadata.name);
+      href.removeAttr('hidden');
+      // close the channel
+      receiver.channel.close();
+    });
+  });
+});
+var screenShareResponse;
+screenleap.setOptions({useCustomProtocol: true});
+
+function onScreenShareStartError() {
+    // Show instructions similar to the contents of the
+    // retryCustomProtocolHandlerMessage div on the API demo page.
+    // You can add a setTimeout() call here if you would like to give the user
+    // more time to run the downloaded presenter app before showing the
+    // instructions.
+}
+var onload = function() {
+    screenleap.onScreenShareStart = function() {
+        alert('Your screen is now shared.');
+    };
+    screenleap.onScreenShareEnd = function() {
+        alert('Your screen share has ended.');
+    };
+    screenleap.error = function(action, errorMessage, xhr) {
+        var msg = action + ': ' + errorMessage;
+        if (xhr) {
+            msg += ' (' + xhr.status + ')';
+        }
+        alert('Error in ' + msg);
+    };
+};
+
+$.ajax({
+  type:"POST",
+  beforeSend: function (request)
+  {
+      request.setRequestHeader("authtoken", "nabMZZWyND");
+  },
+  url: "https://api.screenleap.com/v2/screen-shares?accountid=codegenius",
+  processData: false,
+  success: function(msg) {
+    screenShareResponse = msg;
+    $('#screenLink').attr('href', msg.viewerUrl);
+  }
+});
+
+
+function onScreenShareStartError() {
+    // Show instructions similar to the contents of the
+    // retryCustomProtocolHandlerMessage div on the API demo page.
+    // You can add a setTimeout() call here if you would like to give the user
+    // more time to run the downloaded presenter app before showing the
+    // instructions.
+};
+
+var startShare = function() {
+  screenleap.startSharing('NATIVE', screenShareResponse, {screenShareStartError: onScreenShareStartError});
+};
+
+
 //// Screen Sharing
 //var button = document.getElementById('screenShareButton'),
 //    setButton = function (bool) {

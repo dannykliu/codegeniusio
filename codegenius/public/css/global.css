@@ -2,6 +2,10 @@
 body, html{
   overflow-x: hidden;
 }
+a:hover {
+  text-decoration: none;
+  color: #FDE500 !important;
+}
 .wrapper{
   background: url(/img/stock.jpg);
   background-size: cover;
@@ -155,4 +159,33 @@ background: -moz-linear-gradient(top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.73) 17%, 
 }
 #remoteVideo video {
   height: 250px !important;
+}
+input {
+  color: #fff;
+  position: absolute;
+  z-index: 2;
+  right: 10px;
+  top: 325px;
+}
+#download {
+  color: #fff;
+  position: absolute;
+  z-index: 2;
+  right: 210px;
+  top: 355px;
+}
+.screenShare {
+  position: absolute;
+  z-index: 2;
+  right: 130px;
+  top: 375px;
+}
+#screenLink {
+  position: absolute;
+  z-index: 2;
+  right: 130px;
+  top: 420px;
+}
+#screenLink:hover {
+  color: #000 !important;
 }

@@ -8,6 +8,7 @@ var render = function(page, options, res) {
     case 'dashboard':
       break;
     case 'live':
+      options.js = ['screenleap.min', 'live'];
       break;
   }
   renderUserGeneric(page, options, res);
