@@ -90,4 +90,9 @@ app.io.route('createRoom', function(req) {
   console.log(req.room);
 });
 
+app.io.route('shareLink', function(req) {
+    req.io.room(req.data.room).broadcast('shareLink', req.data);
+});
+
+
 module.exports = app;

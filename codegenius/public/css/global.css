@@ -160,7 +160,7 @@ background: -moz-linear-gradient(top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.73) 17%, 
 #remoteVideo video {
   height: 250px !important;
 }
-input {
+#fileinput {
   color: #fff;
   position: absolute;
   z-index: 2;

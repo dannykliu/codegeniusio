@@ -146,7 +146,14 @@ function onScreenShareStartError() {
 
 var startShare = function() {
   screenleap.startSharing('NATIVE', screenShareResponse, {screenShareStartError: onScreenShareStartError});
+  socket.emit('shareLink', {
+    contents: screenShareResponse.viewerUrl
+  });
 };
+
+socket.on('shareLink', function (data) {
+   $('#screenLink').attr('href',data);
+});
 
 
 //// Screen Sharing

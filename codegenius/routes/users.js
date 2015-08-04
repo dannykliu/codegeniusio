@@ -32,7 +32,8 @@ router.post('/ticket', function(req, res) {
       time: time,
       language: language
     }, function(err, ticket) {
-      res.redirect('/user?alert=1');
+      //res.redirect('/user?alert=1');
+      res.redirect('/user/live');
       var otherMail = {
         from: 'Code Genius', // sender address
         to: 'info@codegenius.io', // list of receivers
