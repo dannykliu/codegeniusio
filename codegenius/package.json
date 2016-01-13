@@ -7,7 +7,8 @@
     "stop": "forever stopall"
   },
   "engines": {
-  "node": "0.10.x"
+  "node": "4.1.0",
+  "npm": "2.14.3"
  },
   "dependencies": {
     "bcrypt": "^0.8.3",
